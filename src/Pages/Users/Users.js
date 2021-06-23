@@ -3,7 +3,8 @@ import styled                       from 'styled-components';
 import axios                        from "axios";
 import BootstrapTable               from 'react-bootstrap-table-next';
 import Pagination                   from 'react-js-pagination';
-import {Field, Form, Formik}        from "formik";
+import {Field, Form, Formik} from "formik";
+import UserCard from './UserCard';
 
 const Wrapper = styled.div`
   margin-top: 1em;
@@ -81,7 +82,10 @@ function Users() {
                 )}
 
             </Formik>
-            <BootstrapTable keyField = "id" data = {users} columns = {columns}/>
+
+            {users.map((user) => {
+                return <UserCard key={user.id} user={user} />;
+            })}
 
             <div>
                 <Pagination

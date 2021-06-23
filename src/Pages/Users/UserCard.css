@@ -1,0 +1,16 @@
+.card-item-body{
+    border:1px solid rgba(0,0,0,.125);
+    border-left: 3px solid red;
+    display: flex;
+}
+
+#profileImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: gray;
+    font-size: 35px;
+    color: #fff;
+    text-align: center;
+    margin: 0 20px 0 0;
+}
