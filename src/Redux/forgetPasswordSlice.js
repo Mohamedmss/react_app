@@ -4,12 +4,12 @@ export const forgetPasswordSlice = createSlice({
 
     name :'user',
     initialState : {
-        value : {}
+        value : JSON.parse(localStorage.getItem('forget_password_user')),
     },
     reducers :{
         setUser: (state , action)=>{
-            console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
             state.value  = action.payload;
+            localStorage.setItem("forget_password_user", JSON.stringify(action.payload));
         },
     }
 });

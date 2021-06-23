@@ -4,25 +4,21 @@ export const authenticatedSlice = createSlice({
 
     name: 'authenticated',
     initialState: {
-        token: '',
-        user: {},
+        token: localStorage.getItem('token'),
+        user: JSON.parse(localStorage.getItem('user')),
     },
     reducers: {
         login: (state, action) => {
-            console.log("AAAAAAAAAAAAAAAAAAAAA");
-            console.log(action.payload);
             state.user = action.payload.user;
             state.token = action.payload.access_token;
             localStorage.setItem("token", action.payload.access_token);
-
-            console.log(state.user);
-            console.log(state.token);
+            localStorage.setItem("user", JSON.stringify(action.payload.user));
         },
         logout: (state, action) => {
-            console.log("BBBBBBBBBBBBBBBBBBBBB");
             state.token = '';
             state.user = {};
-            localStorage.clear();
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
         },
     }
 });

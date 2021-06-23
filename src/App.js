@@ -17,12 +17,8 @@ import {useSelector}   from "react-redux";
 
 function App() {
 
-    const token = useSelector((state) => state.authenticated.access_token);
+    const token = useSelector((state) => state.authenticated.token);
 
-    console.log("token : ",token);
-    console.log("localStorage : ",localStorage.getItem('token'));
-//     const token = localStorage.getItem('token');
-// console.log(token);
     return (
         <BrowserRouter>
             {token ? <NavigationBar/> : <GuestNavigationBar/>}
