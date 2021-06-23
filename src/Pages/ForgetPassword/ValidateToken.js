@@ -1,16 +1,21 @@
-import React                      from 'react';
+import React, {useState} from 'react';
 import '../Login/Login.css'
-import {Field, Form, Formik}      from 'formik';
+import {Form, Formik}      from 'formik';
 import axios                      from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserAction}            from "../../Redux/Actions/setUserAction";
 import {useHistory}               from "react-router-dom";
+import OtpInput from 'react-otp-input';
 
 function ValidateToken() {
     let history = useHistory();
     const dispatch = useDispatch();
 
+    const [token, setToken] = useState([]);
+
     const user = useSelector((state) => state.user.value);
+
+    let handleChange = (otp) => setToken(otp);
 
     return (
         <div className = "login-wrapper">
@@ -21,7 +26,7 @@ function ValidateToken() {
                 onSubmit = {values => {
                     axios.post('https://boiler-stage.ibtikar.sa/api/v1/users/password/validate-token', {
                         email: user.email,
-                        token: values.token,
+                        token: token,
                     }, {
                         headers: {
                             "X-Api-Key": "boilerplate_react",
@@ -40,16 +45,17 @@ function ValidateToken() {
 
                 {({errors, touched, isValidating}) => (
                     <Form>
-
-                        <div className = "form-group">
-                            <label>Token</label>
-                            <Field name = "token" className = "form-control"
-                                   placeholder = "Enter Token" type = "text"/>
+                        <div className="form-group center-class">
+                                <OtpInput value={token} onChange={handleChange} numInputs={10}
+                                          separator={<span>-</span>} containerStyle={"full-width"} inputStyle={"otp-input"}/>
                         </div>
-
-                        <button type = "submit" className = "btn btn-dark btn-lg btn-block">
-                            Send
-                        </button>
+                        <div className="form-group center-class">
+                            <div className="col-md-3 center-class">
+                                <button type = "submit" className = "btn btn-dark btn-lg btn-block">
+                                    Send
+                                </button>
+                            </div>
+                        </div>
 
                     </Form>
                 )}

@@ -11,3 +11,12 @@
 .form-group{
     padding-bottom: 1rem;
 }
+.center-class{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.otp-input{
+    width: 3rem !important;
+}
